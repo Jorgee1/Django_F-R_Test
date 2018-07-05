@@ -6,17 +6,26 @@ class City(models.Model):
     class Meta:
         ordering = ('name',)
 
+    def __str__(self):
+        return self.name
+
 class Color(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
     class Meta:
         ordering = ('name',)
 
+    def __str__(self):
+        return self.name
+
 class Languaje(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
     class Meta:
         ordering = ('name',)
+
+    def __str__(self):
+        return self.name
 
 class Person(models.Model):
     MALE   = 'M'
