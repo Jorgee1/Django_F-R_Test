@@ -14,7 +14,7 @@ class Command(BaseCommand):
         Languaje.objects.all().delete()
         Person.objects.all().delete()
 
-        with open('data_set/MOCK_DATA.csv') as db:
+        with open('data_set/MOCK_DATA.csv', encoding="latin1") as db:
             data = csv.DictReader(db)
             for i in data:
                 print(i)
