@@ -3,6 +3,7 @@ from .forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
+from .serializers import *
 
 def loginView(request):
 	if not request.user.is_authenticated:
@@ -47,8 +48,16 @@ def ProfileView(request):
 	if not request.user.is_authenticated:
 		return render(request, 'forms_test/login_error.html')
 	else:
-		form = signupForm({'username':request.user.username})
-		print(request.user)
+		user = User.objects.get(pk=request.user.id)
+		if request.method == 'POST':
+			form = profileForm(request.POST)
+			if form.is_valid():
+				user.email      = form.cleaned_data['email']
+				user.first_name = form.cleaned_data['first_name']
+				user.last_name  = form.cleaned_data['last_name']
+				user.save()
+
+		form = profileForm(UserSerializer(user).data)
 		return render(request, 'forms_test/profile.html', {'user': request.user, 'form':form})
 
 def homePage(request):
@@ -57,4 +66,3 @@ def homePage(request):
 	else:
 		print(request.user)
 		return render(request, "forms_test/index.html", {'user':request.user})
-

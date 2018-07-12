@@ -5,9 +5,10 @@
 		<title>{{user}}</title>
 	</head>
 	<body>
+		<a href="/forms/home/">HOME</a>
 		<p>{{user}}</p>
 
-		<form action="">
+		<form action="" method="post">
 			{% csrf_token %}
 			{{form.as_p}}
 			<input type="submit" value="Update" />
