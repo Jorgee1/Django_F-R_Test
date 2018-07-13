@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from .serializers import *
 from .models import *
+import random
+import string
+
 
 def loginView(request):
 	if not request.user.is_authenticated:
@@ -70,5 +73,15 @@ def homePage(request):
 
 def ranchView(request):
 	creatures = Creature.objects.filter(owner__pk=request.user.id)
-	print(creatures)
 	return render(request, 'forms_test/ranch.html', {'user':request.user,'creatures':creatures})
+
+def addCrature(request):
+	if not request.user.is_authenticated:
+		return render(request, 'forms_test/login_error.html')
+	else:
+		user = User.objects.get(pk=request.user.id)
+		races = BaseCreature.objects.all()
+		id = random.randint(1,races.count())
+		creature = Creature(name=''.join(random.choice(string.ascii_letters) for m in range(10)), race=races[id], owner=user )
+		creature.save()
+		return HttpResponse('<a href="/forms/home/">HOME</a> <div>' + creature.name + ' added</div>')

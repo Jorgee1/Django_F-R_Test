@@ -24,7 +24,7 @@ class Creature(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     blank = models.CharField(max_length=30, blank=True)
-
+    money = models.IntegerField(default=0)
     def __str__(self):
         return self.user.username
 
