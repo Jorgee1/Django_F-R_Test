@@ -9,4 +9,5 @@ urlpatterns = [
     path('profile/', views.profileView),
     path('ranch/', views.ranchView),
     path('add/', views.addCrature),
+    path('users/', views.queryUsers)
 ]

@@ -85,3 +85,17 @@ def addCrature(request):
 		creature = Creature(name=''.join(random.choice(string.ascii_letters) for m in range(10)), race=races[id], owner=user )
 		creature.save()
 		return HttpResponse('<a href="/forms/home/">HOME</a> <div>' + creature.name + ' added</div>')
+
+def queryUsers(request):
+    if not request.user.is_authenticated:
+        return render(request, 'forms_test/login_error.html')
+    else:
+        if request.method == 'POST':
+            form = searchUser(request.POST)
+            if form.is_valid():
+                print(form.cleaned_data)
+                users = User.objects.filter(username__icontains=form.cleaned_data['username'])
+
+                return render(request, 'forms_test/search_user.html', {'form': form, 'users': users})
+
+        return render(request, 'forms_test/search_user.html', {'form': form})
