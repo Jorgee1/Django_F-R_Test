@@ -8,6 +8,14 @@ from .models import *
 import random
 import string
 
+""" Credenciales Usuarios
+	bclayillu
+	QD6u03NpKpP
+
+
+	mmcgrorty1r
+	eGPQD75T
+"""
 
 def loginView(request):
 	if not request.user.is_authenticated:
@@ -18,7 +26,7 @@ def loginView(request):
 				user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
 				if user is not None:
 					login(request, user)
-					return HttpResponseRedirect('/forms/home/')
+					return HttpResponseRedirect('home/')
 				else:
 					return render(request, "forms_test/login.html", {'form': form, 'error': 'Not a User'})
 		else:
@@ -26,7 +34,7 @@ def loginView(request):
 
 		return render(request, "forms_test/login.html", {'form': form})
 	else:
-		return HttpResponseRedirect('/forms/home/')
+		return HttpResponseRedirect('home/')
 
 def signupView(request):
 	if not request.user.is_authenticated:
@@ -36,17 +44,17 @@ def signupView(request):
 				print(form.cleaned_data)
 				user = User.objects.create_user(**form.cleaned_data)
 				login(request, user)
-				return HttpResponseRedirect('/forms/home/')
+				return HttpResponseRedirect('home/')
 		else:
 			form = signupForm()
 
 		return render(request, "forms_test/signup.html", {'form': form})
 	else:
-		return HttpResponseRedirect('/forms/home/')
+		return HttpResponseRedirect('home/')
 
 def logoutView(request):
 	logout(request)
-	return HttpResponseRedirect('/forms/')
+	return HttpResponseRedirect('/')
 
 def profileView(request):
 	if not request.user.is_authenticated:
@@ -62,18 +70,21 @@ def profileView(request):
 				user.save()
 		print(UserSerializer(user).data)
 		form = profileForm(UserSerializer(user).data)
-		return render(request, 'forms_test/profile.html', {'user': request.user, 'form':form})
+		return render(request, 'forms_test/base_profile.html', {'user': request.user, 'form':form})
 
 def homePage(request):
 	if not request.user.is_authenticated:
 		return render(request, 'forms_test/login_error.html')
 	else:
 		print(request.user)
-		return render(request, 'forms_test/index.html', {'user':request.user})
+		return render(request, 'forms_test/base_index.html', {'user':request.user})
 
 def ranchView(request):
-	creatures = Creature.objects.filter(owner__pk=request.user.id)
-	return render(request, 'forms_test/ranch.html', {'user':request.user,'creatures':creatures})
+	if not request.user.is_authenticated:
+		return render(request, 'forms_test/login_error.html')
+	else:
+		creatures = Creature.objects.filter(owner__pk=request.user.id)
+		return render(request, 'forms_test/base_ranch.html', {'user':request.user,'creatures':creatures})
 
 def addCrature(request):
 	if not request.user.is_authenticated:
@@ -84,7 +95,7 @@ def addCrature(request):
 		id = random.randint(1,races.count())
 		creature = Creature(name=''.join(random.choice(string.ascii_letters) for m in range(10)), race=races[id], owner=user )
 		creature.save()
-		return HttpResponse('<a href="/forms/home/">HOME</a> <div>' + creature.name + ' added</div>')
+		return HttpResponse('<a href="/home/">HOME</a> <div>' + creature.name + ' added</div>')
 
 def queryUsers(request):
     if not request.user.is_authenticated:
@@ -96,6 +107,7 @@ def queryUsers(request):
                 print(form.cleaned_data)
                 users = User.objects.filter(username__icontains=form.cleaned_data['username'])
 
-                return render(request, 'forms_test/search_user.html', {'form': form, 'users': users})
+                return render(request, 'forms_test/base_search_user.html', {'form': form, 'users': users})
 
-        return render(request, 'forms_test/search_user.html', {'form': form})
+        form = searchUser()
+        return render(request, 'forms_test/base_search_user.html', {'form': form})

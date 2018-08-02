@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {% block title %} Document {% endblock %} </title>
+  </head>
+  <body>
+
+    <a href="/home/">HOME</a>
+		<a href="/profile/">Profile</a>
+		<a href="/ranch/">Ranch</a>
+    <a href="/users/">Search Users</a>
+		<a href="/logout/">Log Out</a>
+
+    <div>
+      {% block content %}
+      {% endblock %}
+    </div>
+
+		{% block script %}{% endblock %}
+
+  </body>
+</html>

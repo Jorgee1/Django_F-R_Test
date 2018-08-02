@@ -6,6 +6,6 @@ from rest_framework import routers, serializers, viewsets
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('forms/', include('forms_test.urls')),
+    path('', include('forms_test.urls')),
+    path('rest/', include('main.urls')),
 ]
