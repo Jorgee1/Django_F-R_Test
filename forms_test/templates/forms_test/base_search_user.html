@@ -35,8 +35,8 @@
 
   </form>
 
-  {% for i in users %}
-    <p>{{i}}</p>
+  {% for user in users.qs %}
+    <p>{{user.username}} - {{user.first_name}} - {{user.last_name}} - {{user.email}}</p>
   {% endfor %}
 
 {% endblock %}

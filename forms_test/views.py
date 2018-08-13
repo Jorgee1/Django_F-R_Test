@@ -7,7 +7,7 @@ from .serializers import *
 from .models import *
 import random
 import string
-
+from .filters import UserFilter
 """ Credenciales Usuarios
 	bclayillu
 	QD6u03NpKpP
@@ -102,11 +102,14 @@ def queryUsers(request):
         return render(request, 'forms_test/login_error.html')
     else:
         if request.method == 'POST':
+            print(request.POST)
             form = searchUser(request.POST)
             if form.is_valid():
                 print(form.cleaned_data)
-                users = User.objects.filter(username__icontains=form.cleaned_data['username'])
-
+                users = UserFilter(form.cleaned_data, queryset=User.objects.all())
+                print(users.qs)
+                #users = User.objects.filter(username__icontains=form.cleaned_data['username'])
+                
                 return render(request, 'forms_test/base_search_user.html', {'form': form, 'users': users})
 
         form = searchUser()

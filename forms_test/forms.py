@@ -22,5 +22,5 @@ class searchUser(forms.Form):
 	username   = forms.CharField(label='username')
 	first_name = forms.CharField(label='first name', required=False, max_length=100)
 	last_name  = forms.CharField(label='last name', required=False, max_length=100)
-	email      = forms.EmailField(label='email', required=False)
+	email      = forms.CharField(label='email', required=False, max_length=100)
 
