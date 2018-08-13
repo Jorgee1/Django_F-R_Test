@@ -1,0 +1,16 @@
+{% extends "forms_test/base.html" %}
+
+
+{% block title %} Home {% endblock %}
+
+
+{% block content %}
+
+  <p>Welcome {{ user.first_name }} {{ user.last_name }}</p>
+  <p>Currency {{ user.profile.money }}</p>
+
+  <div>
+  		<a href="add/">Add</a>
+  </div>
+
+{% endblock %}
