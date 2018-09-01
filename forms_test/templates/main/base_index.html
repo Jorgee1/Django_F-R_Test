@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}{% endblock %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+{% block content %}
+
+	<p>Welcome {{ user.first_name }} {{ user.last_name }}</p>
+	<p>Currency {{ user.profile.money }}</p>
+
+
+	<canvas id="screen"></canvas>
+
+{% endblock %}
+
+
+{% block script %}
+	<script src="{% static 'js/games/test.js' %}"></script>
+{% endblock %}

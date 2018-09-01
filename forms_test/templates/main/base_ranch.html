@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block title %} Ranch {% endblock %}
+
+{% block content %}
+
+	<p>Ranch</p>
+	<p>{{ user }}</p>
+	<div>
+		<a href="/add/">Add</a>
+	</div>
+	{% if creatures %}
+	  {% for creature in creatures %}
+	    <div>
+	      <p><b>{{ creature }}</b> {{ creature.race }} LVL {{ creature.level }}</p>
+	    </div>
+	  {% endfor %}
+	{% else %}
+	  <p>No creatures</p>
+	{% endif %}
+
+{% endblock %}
