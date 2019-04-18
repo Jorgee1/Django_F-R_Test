@@ -1,0 +1,56 @@
+:root {
+	--primary-color:#faa916;
+	--secondary-color:#d95d39;
+	--tertiary-color:#442b48;
+	--quarteary-color:#7b9e89;
+	--quintiary-color:#726e60;
+
+	--black-color:#302b27;
+	--white-color:#f5f3f5;
+}
+
+.style-link{
+	text-decoration: none;
+}
+
+.text-white{
+	color: var(--white-color);
+}
+
+.text-black{
+	color: var(--black-color);
+}
+
+.space-vertical{
+	margin: 10px 0px;
+}
+
+/*
+
+	Button Styles
+*/
+
+.button-primary{
+	background-color: var(--primary-color);
+	color: var(--white-color);
+}
+
+.button-secondary {
+	background-color: var(--secondary-color);
+	color: var(--white-color);
+}
+
+.button-tertiary {
+	background-color: var(--tertiary-color);
+	color: var(--white-color);
+}
+
+.button-quarteary {
+	background-color: var(--quarteary-color);
+	color: var(--black-color);
+}
+
+.button-quintiary {
+	background-color: var(--quintiary-color);
+	color: var(--black-color);
+}

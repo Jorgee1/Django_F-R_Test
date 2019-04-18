@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Ranch</title>
+
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+		<link rel="stylesheet" href="{% static 'css/utils.css' %}">
+		<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+	</head>
+	<body class="site">
+
+		<header class="header">
+			<h1><a class="style-link text-black" href="{% url 'home' %}">HTTP Creatures</a></h1>
+		</header>
+
+		<nav class="nav">
+			<a class="style-link text-black" href="{% url 'home' %}">Home</a>
+			<a class="style-link text-black" href="{% url 'profile' %}">Profile</a>
+			<a class="style-link text-black" href="{% url 'ranch' %}"><b>Ranch</b></a>
+			<a class="style-link text-black" href="{% url 'search_user' %}">Search</a>
+			<a class="style-link text-black" href="{% url 'logout' %}">Log Out</a>
+		</nav>
+
+		<main class="main">
+			<p>Ranch</p>
+			<p>{{ user }}</p>
+			<div>
+				<a href="/add/">Add</a>
+			</div>
+			{% if creatures %}
+			  {% for creature in creatures %}
+			    <div>
+			      <p><b>{{ creature }}</b> {{ creature.race }} LVL {{ creature.level }}</p>
+			    </div>
+			  {% endfor %}
+			{% else %}
+			  <p>No creatures</p>
+			{% endif %}
+		</main>
+		
+
+		<footer class="footer">
+			<p>Footer</p>
+		</footer>
+
+	</body>
+</html>
