@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Login</title>
+
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+		<link rel="stylesheet" href="{% static 'css/utils.css' %}">
+		<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+	</head>
+	<body class="site">
+
+		<header class="header">
+			<h1 ><a class="style-link text-black" href="{% url 'login' %}">HTTP Creatures</a></h1>
+		</header>
+
+		<main class="main">
+
+			<form class="pure-form login-form" action="{% url 'login' %}" method="post">
+				{% csrf_token %}
+
+				{% if error %}
+				<p>Incorrect credentials</p>
+				{% endif %}
+
+				{{ form }}
+
+				<input class="pure-button button-primary space-vertical" type="submit" value="Submit" />
+				<a class="pure-button button-secondary" href="{% url 'sign_up' %}">Sign up</a>
+
+			</form>
+
+			
+		</main>
+		
+	</body>
+</html>

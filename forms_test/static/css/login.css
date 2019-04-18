@@ -1,0 +1,30 @@
+/*
+
+	Needs utils.css
+*/
+
+.header{
+	background-color: var(--primary-color);
+}
+
+.site {
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+}
+
+.main {
+	flex: 1 0;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0%;
+}
+
+@media (min-width: 600px) {
+	.login-form {
+		margin: 10px 10%;
+	}
+}
